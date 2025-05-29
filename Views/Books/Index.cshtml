@@ -1,0 +1,59 @@
+@{
+    ViewData["Title"] = "Books";
+}
+@model BookStoreApp.ViewModels.BooksViewModel
+
+<h2>Books</h2>
+<div style="display: flex;">
+   
+    <div style=" width: 50%;">
+        <form method="get" asp-action="Index" class="row g-3 mb-4">
+            <div class="col-md-5">
+                <input type="text" name="searchTerm" value="@Model.SearchTerm"
+                       class="form-control" placeholder="Search by Book or Author" />
+            </div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success">Search</button>
+            </div>
+        </form>
+    </div>
+    <div style=" width: 50%;">
+        <a asp-action="Create" class="btn btn-primary">Add New</a>
+    </div>
+</div>
+@if (Model.Books != null && Model.Books.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Price</th>
+                <th>Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Books)
+            {
+                <tr>
+                    <td>@item.Title</td>
+                    <td>@item.Author</td>
+                    <td>@item.Price</td>
+                    <td>@item.PublishedDate.ToShortDateString()</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p class="text-danger">No books found.</p>
+}
+
+

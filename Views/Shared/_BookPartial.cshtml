@@ -1,0 +1,9 @@
+@model BookStoreApp.Models.Book
+
+<div>
+    <h4>@Model.Title</h4>
+    <p>Author: @Model.Author</p>
+    <p>Price: $@Model.Price</p>
+    <p><a asp-controller="Books" asp-action="Details" asp-route-id="@Model.Id">View Details</a></p>
+    <hr />
+</div>
