@@ -1,10 +1,12 @@
 using BookStoreApp.Data;
 using BookStoreApp.Models;
 using BookStoreApp.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStoreApp.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private readonly AppDbContext _context;
